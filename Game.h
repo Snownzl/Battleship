@@ -25,6 +25,7 @@ public:
     // Prints current board layout to screen every call
     void DrawAllBoards();
     void ShowInstructions();
+    void ShowCredits();
 
 private:
     // Player and computer boards used for placing ships, tracking and displaying shots

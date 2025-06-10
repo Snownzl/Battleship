@@ -57,11 +57,12 @@ void Game::Run()
                         |           By Brandon Henwood, for Media Design School, 2025        BB-61/
 ~~~~~~~~~~~~~~~~~~~~~~~~\_______________________________________________________________________|~~~~~~~~~~~~~~~~~~~~~~)" << "\n\n";
         SetRgb(COLOUR_GREEN_ON_BLACK);
-        displayCentered("1. Start New Game\n");
-        displayCentered("2. View Instructions\n");
-        displayCentered("3. Toggle Debug Mode: (" + std::string(debugMode ? "ON" : "OFF") + ")\n");
-        displayCentered("4. Quit\n");
-        displayCentered("Enter your choice (1-4): ");
+        DisplayCentered("1. Start New Game\n");
+        DisplayCentered("2. View Instructions\n");
+        DisplayCentered("3. Toggle Debug Mode: (" + std::string(debugMode ? "ON" : "OFF") + ")\n");
+        DisplayCentered("4. View Credits\n");
+        DisplayCentered("5. Quit\n");
+        DisplayCentered("Enter your choice (1-5): ");
 
         std::string input;
         std::getline(std::cin, input);
@@ -69,16 +70,17 @@ void Game::Run()
         if (input.empty())
         {
             // If no input
-            displayCentered("No input received. Please enter a number between 1 and 4");
+            DisplayCentered("No input received. Please enter a number between 1 and 5");
             Sleep(2000);
             continue;
         }
 
         // Checking for invalid input
         std::istringstream iss(input);
-        if (!(iss >> menuChoice) || menuChoice < 1 || menuChoice > 4)
+        char leftover;
+        if (!(iss >> menuChoice) || (iss >> leftover) || menuChoice < 1 || menuChoice > 5)
         {
-            displayCentered("Invalid input. Please enter a number between 1 and 4");
+            DisplayCentered("Invalid input. Please enter a number between 1 and 5");
             Sleep(2000);
             continue;
         }
@@ -95,11 +97,14 @@ void Game::Run()
             debugMode = !debugMode;
             break;
         case 4:
-            displayCentered("Exiting game\n");
+            ShowCredits();
+            break;
+        case 5:
+            DisplayCentered("Exiting game\n");
             break;
         }
 
-    } while (menuChoice != 4);
+    } while (menuChoice != 5);
 }
 
 // Game Loop
@@ -427,17 +432,17 @@ void Game::DrawAllBoards()
 {
     if (debugMode)
     {
-        std::cout << "\n"; displayCentered("----- Enemy Fleet (DM) -----\n");
+        std::cout << "\n"; DisplayCentered("----- Enemy Fleet (DM) -----\n");
         enemyBoard.Print(true, true);
 
-        std::cout << "\n"; displayCentered("----- Enemy Attacks (DM) -----\n");
+        std::cout << "\n"; DisplayCentered("----- Enemy Attacks (DM) -----\n");
         playerBoard.Print(false, true);
     }
 
-        std::cout << "\n"; displayCentered("----- Your Attacks -----\n");
+        std::cout << "\n"; DisplayCentered("----- Your Attacks -----\n");
         enemyBoard.Print(false, true);
 
-        std::cout << "\n"; displayCentered("----- Your Fleet -----\n");
+        std::cout << "\n"; DisplayCentered("----- Your Fleet -----\n");
         playerBoard.Print(true, true);
 }
 
@@ -445,10 +450,9 @@ void Game::DrawAllBoards()
 void Game::ShowInstructions()
 {
     ClearScreen();
-
     std::string dummy;
 
-    std::cout << "----- Instructions -----\n";
+    std::cout << "===== Instructions =====\n";
     std::cout << "Objective: Defeat the enemy fleet by sinking all of their ships before they sink yours\n";
     std::cout << "Tip - After you score a hit, target adjacent cells until the ship is sunk!\n";
     std::cout << "A message will be displayed when you sink a ship, as well as scoring a hit or miss\n";
@@ -473,6 +477,26 @@ void Game::ShowInstructions()
     std::cout << "  S - Ship\n";
     std::cout << "  X - Hit\n";
     std::cout << "  O - Miss\n\n";
+
+    std::cout << "Press enter to return to the main menu";
+    std::getline(std::cin, dummy);
+}
+
+// Main menu option 4 to show credits, then back to main menu
+void Game::ShowCredits()
+{
+    ClearScreen();
+    std::string dummy;
+
+    std::cout << "===== Credits =====\n\n";
+    std::cout << "Created by Brandon Henwood for Media Design School\n";
+    std::cout << "GD1P01 Assessment 4 Final Project - Battleship\n\n";
+
+    std::cout << "ASCII text from : https://patorjk.com/software/taag/#p=testall&f=Graffiti&t=BATTLESHIP\n";
+    std::cout << "Main Menu 'BATTLESHIP' Font Name : Big Money - ne\n";
+    std::cout << "Victory Screen 'Victory!' Font Name : Standard\n\n";
+    std::cout << "ASCII battleship art from : https://www.asciiart.eu/vehicles/navy (By Matthew Bace)\n";
+    std::cout << "ASCII Fireworks art from : https://www.asciiart.eu/holiday-and-events/fireworks (By Joan Stark)\n\n";
 
     std::cout << "Press enter to return to the main menu";
     std::getline(std::cin, dummy);

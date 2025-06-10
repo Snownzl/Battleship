@@ -32,7 +32,7 @@ void SetRgb(EColour colour);
 void ClearScreen(); 
 
 // Center text in console
-void displayCentered(const std::string& text);
+void DisplayCentered(const std::string& text);
 
 // Validates, converts, and processes input for player turn attack targeting
 // TF: Reference

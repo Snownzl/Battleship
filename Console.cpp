@@ -63,10 +63,10 @@ void ClearScreen()
 }
 
 // Center text in console
-void displayCentered(const std::string& text)
+void DisplayCentered(const std::string& text)
 {
     CONSOLE_SCREEN_BUFFER_INFO csbi;
-    int consoleWidth = 80; // fallback width
+    int consoleWidth = 80;
 
     if (GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi)) 
         consoleWidth = csbi.srWindow.Right - csbi.srWindow.Left + 1;
