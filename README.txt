@@ -56,7 +56,6 @@ The ship will extend vertically or horizontally beginning from the selected coor
 
 ----- Controls -----
 To attack, enter a grid coordinate in the range and format - Letter (A-J) followed by Number (0-9), e.g. B8
-Enter a grid coordinate in the range and format - Letter (A-J) followed by Number (0-9), e.g. B8
 You may only target a coordinate once
 To quit the game, enter 'surrender' during your turn
 
